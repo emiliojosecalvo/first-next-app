@@ -17,3 +17,4 @@ Create "pages" folder in the root directory
 Create index.js page as this is the first page for the app
 
 npm run dev to start the server
+
