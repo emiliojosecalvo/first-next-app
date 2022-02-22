@@ -1,12 +1,13 @@
 import axios from 'axios';
+import Link from 'next/link';
 
-const Index = ({ post }) => {
+const Index = ({ posts }) => {
     return (
         <div  >
             <h1>Hello Emilio</h1>
             <ul>
-                {post.map(p => {
-                    return <li key={p.id}>{p.title}</li>
+                {posts.map(post => {
+                    return <li key={post.id}><Link href={`/post?id=${post.id}`}><a>{post.title}</a></Link></li>
                 })}
             </ul>
         </div >
@@ -16,7 +17,7 @@ const Index = ({ post }) => {
 Index.getInitialProps = async () => {
     const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
     const { data } = response;
-    return { post: data }
+    return { posts: data }
 }
 
 export default Index;
