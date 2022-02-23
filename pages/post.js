@@ -1,14 +1,25 @@
-import { withRouter } from 'next/router';
-const Post = (props) => {//get the id from the query string as a prop
+import axios from 'axios';
+
+const Post = ({ id, comments }) => {
     return (
         <>
-            <h1>ID of the post #{props.router.query.id}</h1>
+            <h1>Post</h1>
+            {comments.map(comment => {
+                return (
+                    <div key={comment.id}>
+                        <h3>{comment.email}</h3>
+                        <p>{comment.body}</p>
+                    </div>
+                )
+            })};
         </>
     )
 };
 
-// Post.getInitialProps = async ({ query }) => {//get data from the query
-//     return query;//return all the data from the query as a prop
-// }
+Post.getInitialProps = async ({ query }) => {
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${query.id}/comments`);
+    const { data } = response;
+    return { ...query, comments: data };
+}
 
-export default withRouter(Post);
+export default Post;
