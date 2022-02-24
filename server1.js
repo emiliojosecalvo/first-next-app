@@ -8,7 +8,7 @@ app.prepare().then(() => {
     const server = express();
 
     server.get('/p/:id', (req, res) => {
-        app.render(req, res, '/post', { id: 11 });
+        app.render(req, res, '/post', { id: req.params.id });
     });
 
     server.get('*', (req, res) => {
