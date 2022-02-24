@@ -3,7 +3,7 @@ import axios from 'axios';
 const Post = ({ id, comments }) => {
     return (
         <>
-            <h1>Post</h1>
+            <h1>Post #{id}</h1>
             {comments.map(comment => {
                 return (
                     <div key={comment.id}>
